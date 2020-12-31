@@ -3,15 +3,16 @@ using namespace std;
 
 int users[100];
 int usrdata[100];
-int nxtusr = 1;
-int session;
-users[0] = 572457; 
+int nxtusr = 2;
+int session; 
 
 void devtools();
 
+void setup();
+
 int tranzactions();
 
-void login(int user)
+int login(int user)
 {
     int reglog;
     int pass = 0;
@@ -26,36 +27,40 @@ void login(int user)
     	cin >> reglog;
     	if(reglog == 1)
     	{	
-       		cout << "Enter your password (only numbers plz): ";
-       		cin >> pass;
        		cout << "\nEnter your ID: ";
-       		cin >> idishnik;
+		cin >> idishnik;
+		cout << "Enter your password (only numbers plz): ";
+       		cin >> pass;
        		if(pass == users[idishnik])
        		{	
           		cout << "You logined";
           		session = idishnik;
-        }
-       else {
-          cout << "Wrong password or ID." << endl;
-          login();
-       }
-    }
-    else 
-    {
+			return 0;
+		}
+       		else {
+         	cout << "Wrong password or ID." << endl;
+          	login(1);
+       		}
+	}
+    	else 
+    	{
        		cout << "Enter your new password: ";
        		cin >> pass;
        		users[nxtusr] = pass;
        		cout << "You registered, please login" << endl;
        		cout << "Your id is " << nxtusr << endl;
        		nxtusr++;
-       		login();
+       		login(1);
     	}
     }
+    return 0;
+}
 
 int main()
 {
     int chosik;
-    login();
+    setup();
+    login(1);
     while(true)
     {
        cout << "\nWelcome, " << session << endl;
@@ -70,11 +75,11 @@ int main()
           case 1:
               tranzactions();
           break;
-          case 2:
-              login();
+          case 5:
+              login(1);
 	  break;
 	  case 7:
-	      devtools()
+	      devtools();
        }
     }
     return 0;
@@ -83,7 +88,7 @@ int main()
 void devtools()
 {
 	int choose;
-	if(session == 0)
+	if(session == 1)
 	{
 		cout << "1: Write manes" << endl;
 		cout << "2: Usr list" << endl;
@@ -107,7 +112,8 @@ void devtools()
 				}
 			break;
 			case 2:
-				
+			cout << "This option in development" << endl;
+			break;	
 		}
 	}
 }
@@ -124,7 +130,7 @@ int tranzactions()
 	switch (choose)
 	{
 		case 1:
-			cout << "Enter a user ID";
+			cout << "Enter a user ID: ";
 			cin >> chuser;
 			if(users[chuser] == 0)
 			{
@@ -140,9 +146,20 @@ int tranzactions()
 				}
 				else {
 					usrdata[chuser] = usrdata[chuser] + amount;
+					usrdata[session] = usrdata[session] - amount;
 					return 0;
 				}
 			}
+		break;
+		case 2:
+			cout << "This function in development" << endl;
+		break;
 	}
-
+	return 0;
 }
+
+void setup()
+{
+	users[1] = 5724;
+}
+
