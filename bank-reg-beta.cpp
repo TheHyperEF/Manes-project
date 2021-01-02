@@ -19,7 +19,7 @@ int login(int user)
     int idishnik;
     if(user == 0)
     {
-    	session == user;
+    	session = user;
     }
     else {
     	cout << "Login or Register?" << endl;
