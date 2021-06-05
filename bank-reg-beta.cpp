@@ -1,4 +1,7 @@
 #include<iostream>
+#include<string.h>
+#include"interface.h"
+#include"menus.h"
 using namespace std;
 
 int users[100];
@@ -12,43 +15,43 @@ void setup();
 
 int tranzactions();
 
+interface display;
+
 int login(int user)
 {
     int reglog;
-    int pass = 0;
+    int pass;
     int idishnik;
     if(user == 0)
     {
     	session = user;
     }
     else {
-    	cout << "Login or Register?" << endl;
-    	cout << "1: Login 2:Register" << endl;
+    	display.showMenu(Login, 2, "Login menu");
     	cin >> reglog;
-    	if(reglog == 1)
+    	if(reglog == 0)
     	{	
-       		cout << "\nEnter your ID: ";
+       		display.showMessage("Enter your ID");
 		cin >> idishnik;
-		cout << "Enter your password (only numbers plz): ";
+		display.showMessage("Enter your password: ");
        		cin >> pass;
        		if(pass == users[idishnik])
        		{	
-          		cout << "You logined";
+          		display.showMessage("You logined");
           		session = idishnik;
 			return 0;
 		}
        		else {
-         	cout << "Wrong password or ID." << endl;
+         	display.showMessage("Wrong password or ID.");
           	login(1);
        		}
 	}
     	else 
     	{
-       		cout << "Enter your new password: ";
+       		display.showMessage("Type your new password");
        		cin >> pass;
        		users[nxtusr] = pass;
-       		cout << "You registered, please login" << endl;
-       		cout << "Your id is " << nxtusr << endl;
+       		display.showMessage("You are registered. ID:", nxtusr);
        		nxtusr++;
        		login(1);
     	}
@@ -63,22 +66,24 @@ int main()
     login(1);
     while(true)
     {
-       cout << "\nWelcome, " << session << endl;
+       /*cout << "\nWelcome, " << session << endl;
        cout << "Money is " << usrdata[session] << endl;
        cout << "1: Tranzactions" << endl;
        cout << "2: Games (coming soon)" << endl;
        cout << "5: Exit" << endl;
        cout << "7: Dev-tools" << endl;
+	   */
+	   display.showMenu(MainMenu, 4, "Main menu of Manes 1.8 E:", usrdata[session]);
        cin >> chosik;
        switch (chosik)
        {   
-          case 1:
+          case 0:
               tranzactions();
           break;
-          case 5:
+          case 2:
               login(1);
 	  break;
-	  case 7:
+	  case 3:
 	      devtools();
        }
     }
@@ -90,29 +95,28 @@ void devtools()
 	int choose;
 	if(session == 1)
 	{
-		cout << "1: Write manes" << endl;
-		cout << "2: Usr list" << endl;
+		display.showMenu(DevMenu, 2, "Development menu");
 		cin >> choose;
 		switch (choose) 
 		{
-			case 1:
+			case 0:
 				int chid;
-				cout << "Enter a usrID" << endl;
+				display.showMessage("User ID");
 				cin >> chid;
 				if(users[chid] == 0)
 				{
-					cout << "User doesn't exist" << endl;	
+					display.showMessage("That user is doesn't exist");
 				}
 				else {
 					int amountmanes;
-					cout << "Enter a nuber" << endl;
+					display.showMessage("How much?");
 					cin >> amountmanes;
 					usrdata[chid] = amountmanes;
-					cout << "Sucess!" << endl;
+					display.showMessage("Success!");
 				}
 			break;
-			case 2:
-			cout << "This option in development" << endl;
+			case 1:
+			display.showMessage("Current version do not support this");
 			break;	
 		}
 	}
@@ -123,26 +127,24 @@ int tranzactions()
 	int choose;
 	int chuser;
 	int amount;
-	cout << "1: Send money" << endl;
-	cout << "2: Take money" << endl;
-	cout << "Enter a number: ";
+	display.showMenu(actionMenu, 2, "Actions");
 	cin >> choose;
 	switch (choose)
 	{
-		case 1:
-			cout << "Enter a user ID: ";
+		case 0:
+			display.showMessage("Type a user ID");
 			cin >> chuser;
 			if(users[chuser] == 0)
 			{
-				cout << "User doesn't exist" << endl;
+				display.showMessage("Couldn't find this user!");
 				return 1;
 			}
 			else {
-				cout << "You want to transfer: ";
+				display.showMessage("How much you want to transfer?");
 				cin >> amount;
 				if(amount >= usrdata[session])
 				{
-					cout << "Not enough money" << endl; 
+					display.showMessage("Not enough money");
 				}
 				else {
 					usrdata[chuser] = usrdata[chuser] + amount;
@@ -151,8 +153,8 @@ int tranzactions()
 				}
 			}
 		break;
-		case 2:
-			cout << "This function in development" << endl;
+		case 1:
+			display.showMessage("Current version doesn't support this");
 		break;
 	}
 	return 0;
