@@ -1,5 +1,6 @@
 #include<iostream>
 #include<string.h>
+#include<conio.h>
 #include"interface.h"
 #include"menus.h"
 #include"mathgame.h"
@@ -131,6 +132,7 @@ void devtools()
 			for(int i=0; i<100; i++){
 				cout << i << ": " << usernames[i] << "      " << usrdata[i] << "      " << users[i] << endl;
 			}
+			while(!kbhit());
 			break;	
 		}
 	}
