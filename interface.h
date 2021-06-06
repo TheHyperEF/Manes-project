@@ -1,5 +1,7 @@
 #include<string.h>
+#include<iostream>
 using namespace std;
+
 class interface
 {
     private:
@@ -12,6 +14,7 @@ class interface
 
     void showMenu(string info[], int numOfElements, string header);
     void showMenu(string info[], int numOfElements, string header, int data);
+    void showMenu(string info[], int numOfElements, string header, int data, string usrname);
 
     void ErrData(int numOfError);
 };
@@ -68,6 +71,19 @@ void interface::showMenu(string info[], int numOfElements, string header, int da
 {
     cout << endl;
     cout << header << data << endl;
+    interface::showLine('#', 30);
+    for(int i=0; i < numOfElements; i++)
+    {
+        cout << i << ": " << info[i] << endl;
+    }    
+    interface::showLine('#', 30);
+}
+
+void interface::showMenu(string info[], int numOfElements, string header, int data, string usrname)
+{
+    cout << endl;
+    cout << header << data << endl;
+    cout << usrname << endl;
     interface::showLine('#', 30);
     for(int i=0; i < numOfElements; i++)
     {

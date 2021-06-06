@@ -2,12 +2,15 @@
 #include<string.h>
 #include"interface.h"
 #include"menus.h"
+#include"mathgame.h"
 using namespace std;
 
 int users[100];
+string usernames[100];
 int usrdata[100];
 int nxtusr = 2;
 int session; 
+int wonmoney=0;
 
 void devtools();
 
@@ -15,7 +18,8 @@ void setup();
 
 int tranzactions();
 
-interface display;
+//interface display;
+
 
 int login(int user)
 {
@@ -48,7 +52,9 @@ int login(int user)
 	}
     	else 
     	{
-       		display.showMessage("Type your new password");
+       		display.showMessage("What's your name? ");
+			cin >> usernames[nxtusr];
+		    display.showMessage("Type your new password");
        		cin >> pass;
        		users[nxtusr] = pass;
        		display.showMessage("You are registered. ID:", nxtusr);
@@ -73,13 +79,17 @@ int main()
        cout << "5: Exit" << endl;
        cout << "7: Dev-tools" << endl;
 	   */
-	   display.showMenu(MainMenu, 4, "Main menu of Manes 1.8 E:", usrdata[session]);
+	   display.showMenu(MainMenu, 4, "Main menu of Manes 1.8 E:", usrdata[session], usernames[session]);
        cin >> chosik;
        switch (chosik)
        {   
           case 0:
               tranzactions();
           break;
+		  case 1:
+		 	  wonmoney = mathgame();
+			  usrdata[session]=usrdata[session]+wonmoney;
+		  	  break;
           case 2:
               login(1);
 	  break;
@@ -116,7 +126,11 @@ void devtools()
 				}
 			break;
 			case 1:
-			display.showMessage("Current version do not support this");
+			//display.showMessage("Current version do not support this");
+			cout << "Number    Name     Money     Password" << endl;
+			for(int i=0; i<100; i++){
+				cout << i << ": " << usernames[i] << "      " << usrdata[i] << "      " << users[i] << endl;
+			}
 			break;	
 		}
 	}
@@ -162,6 +176,7 @@ int tranzactions()
 
 void setup()
 {
+	usernames[1] = "Developer";
 	users[1] = 5724;
 }
 
