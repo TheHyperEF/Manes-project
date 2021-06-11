@@ -1,3 +1,7 @@
+//Okay, project is freezed. No one have interested in it yet. It will still recieve small updates,
+//but not has new features.
+
+
 #include<iostream>
 #include<string.h>
 #include<conio.h>
@@ -12,6 +16,8 @@ int usrdata[100];
 int nxtusr = 2;
 int session; 
 int wonmoney=0;
+string stupidbuffer; //this buffer does nothing. Nevermind, it's stupid.
+
 
 void devtools();
 
@@ -19,6 +25,10 @@ void setup();
 
 int tranzactions();
 
+bool IsEven(int a)
+{
+    return (a % 2) == 0;
+}
 //interface display;
 
 
@@ -80,7 +90,7 @@ int main()
        cout << "5: Exit" << endl;
        cout << "7: Dev-tools" << endl;
 	   */
-	   display.showMenu(MainMenu, 4, "Main menu of Manes 1.8 E:", usrdata[session], usernames[session]);
+	   display.showMenu(MainMenu, 4, "Main menu of Manes 2.0 E:", usrdata[session], usernames[session]);
        cin >> chosik;
        switch (chosik)
        {   
@@ -130,10 +140,13 @@ void devtools()
 			//display.showMessage("Current version do not support this");
 			cout << "Number    Name     Money     Password" << endl;
 			for(int i=0; i<100; i++){
-				cout << i << ": " << usernames[i] << "      " << usrdata[i] << "      " << users[i] << endl;
+				cout << i << ": " << usernames[i] << "      " << usrdata[i] << "      " << users[i] << "         ";
+				if (IsEven(i)) {
+					cout << endl;
+				}
 			}
-			while(!kbhit());
-			break;	
+			cin >> stupidbuffer;
+			break;
 		}
 	}
 }
@@ -153,6 +166,7 @@ int tranzactions()
 			if(users[chuser] == 0)
 			{
 				display.showMessage("Couldn't find this user!");
+				sleep(2);
 				return 1;
 			}
 			else {
@@ -161,6 +175,7 @@ int tranzactions()
 				if(amount >= usrdata[session])
 				{
 					display.showMessage("Not enough money");
+					sleep(2);
 				}
 				else {
 					usrdata[chuser] = usrdata[chuser] + amount;
@@ -170,7 +185,32 @@ int tranzactions()
 			}
 		break;
 		case 1:
-			display.showMessage("Current version doesn't support this");
+			//display.showMessage("Current version doesn't support this");
+			int userBuffer;
+			int passBuffer;
+			display.showMessage("User ID: ");
+			cin >> userBuffer;
+			display.showMessage("Password: ");
+			cin >> passBuffer;
+			if (passBuffer==users[userBuffer])
+			{
+				int amountBuffer;
+				display.showMessage("How much you want to take?");
+				cin >> amountBuffer;
+				if(amountBuffer>usrdata[userBuffer]) {
+					display.showMessage("Not enough");
+					sleep(5);
+					break;
+				}
+				else {
+					display.showMessage("Ok, no problem. Please wait...");
+					sleep(5);
+					usrdata[session]=usrdata[session]+amountBuffer;
+					usrdata[userBuffer]=usrdata[userBuffer]+amountBuffer;
+					display.showMessage("Done!");
+					sleep(2);
+				}
+			}
 		break;
 	}
 	return 0;
