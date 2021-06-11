@@ -1,2 +1,2 @@
 # Manes-project
-Just a joke. Simple authorization with datebase.
+Just a joke. Simple authorization with database.
