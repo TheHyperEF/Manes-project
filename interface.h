@@ -31,6 +31,7 @@ void interface::showLine(char symbol, int num)
 void interface::showMessage(string info)
 {
     cout << endl;
+    system("clear");
     showLine('@', 30);
     cout << info << endl;
     showLine('@', 30);
@@ -39,6 +40,7 @@ void interface::showMessage(string info)
 void interface::showMessage(string info, int data)
 {
     cout << endl;
+    system("clear");
     showLine('@', 30);
     cout << info << data << endl;
     showLine('@', 30);
@@ -47,6 +49,7 @@ void interface::showMessage(string info, int data)
 void interface::showMenu(string info[], int numOfElements, string header)
 {
     cout << endl;
+    system("clear");
     cout << header << endl;
     interface::showLine('#', 30);
     for(int i=0; i < numOfElements; i++)
@@ -59,6 +62,7 @@ void interface::showMenu(string info[], int numOfElements, string header)
 void interface::showMessageMultiline(string info[], int numOfElements)
 {
     cout << endl;
+    system("clear");
     interface::showLine('#', 30);
     for(int i=0; i < numOfElements; i++)
     {
@@ -70,6 +74,7 @@ void interface::showMessageMultiline(string info[], int numOfElements)
 void interface::showMenu(string info[], int numOfElements, string header, int data)
 {
     cout << endl;
+    system("clear");
     cout << header << data << endl;
     interface::showLine('#', 30);
     for(int i=0; i < numOfElements; i++)
@@ -82,6 +87,7 @@ void interface::showMenu(string info[], int numOfElements, string header, int da
 void interface::showMenu(string info[], int numOfElements, string header, int data, string usrname)
 {
     cout << endl;
+    system("clear");
     cout << header << data << endl;
     cout << usrname << endl;
     interface::showLine('#', 30);
